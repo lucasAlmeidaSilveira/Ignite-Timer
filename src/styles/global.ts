@@ -23,4 +23,8 @@ export const GlobalStyle = createGlobalStyle`
     font-weight: 700;
     font-size: 1rem;
   }
+
+  button {
+    cursor: pointer;
+  }
 `
