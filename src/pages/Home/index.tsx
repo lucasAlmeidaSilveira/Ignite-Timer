@@ -13,11 +13,14 @@ import { useForm } from 'react-hook-form'
 export function Home() {
   const { register, handleSubmit, watch } = useForm()
 
-  function handleCreateNewCycle(data) {}
+  function handleCreateNewCycle(data: any) {
+    console.log(data)
+  }
 
   const task = watch('task')
+  const minutesAmount = watch('minutesAmount')
 
-  const isSubmitDisabled = !task
+  const isSubmitDisabled = !task || !minutesAmount
 
   return (
     <HomeContainer>
