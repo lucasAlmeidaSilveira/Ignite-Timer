@@ -27,6 +27,7 @@ interface CycleProps {
   task: string
   minutesAmount: number
   startDate: Date
+  interruptedDate?: Date
 }
 
 export function Home() {
@@ -77,6 +78,20 @@ export function Home() {
     reset()
   }
 
+  function handleInterruptCycle() {
+    setCycles(
+      cycles.map((cycle) => {
+        if (cycle.id === activeCycleId) {
+          return { ...cycle, interruptedDate: new Date() }
+        } else {
+          return cycle
+        }
+      }),
+    )
+
+    setActiveCycleId(null)
+  }
+
   const totalSeconds = activeCycle ? activeCycle.minutesAmount * 60 : 0
   const currentSeconds = activeCycle ? totalSeconds - amountSecondsPassed : 0
 
@@ -89,6 +104,8 @@ export function Home() {
   useEffect(() => {
     if (activeCycle) {
       document.title = `${minutes}:${seconds}`
+    } else {
+      document.title = 'Ignite Timer'
     }
   }, [activeCycle, minutes, seconds])
 
@@ -139,7 +156,7 @@ export function Home() {
         </CountDownContainer>
 
         {activeCycle ? (
-          <StopCountDownButton type="button">
+          <StopCountDownButton onClick={handleInterruptCycle} type="button">
             <HandPalm size={24} />
             Interromper
           </StopCountDownButton>
