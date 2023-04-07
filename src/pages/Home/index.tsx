@@ -49,7 +49,7 @@ export function Home() {
         </FormProvider>
         <CountDown />
 
-        {activeCycle ? (
+        {activeCycle && !activeCycle.finishedDate ? (
           <StopCountDownButton onClick={interruptCycle} type="button">
             <HandPalm size={24} />
             Interromper
